@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping AS ORM;
 class cours_passed
 {
     /**
+		 * @ORM\Id
      * @ORM\ManyToOne(targetEntity="student", inversedBy="coursPassed")
      * @ORM\JoinColumn(name="student_user_id", referencedColumnName="user_id")
      */

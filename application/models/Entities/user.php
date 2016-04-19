@@ -1,5 +1,4 @@
-<?php
-namespace Entities;
+<?php namespace Entities;
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -7,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr",length=25, type="string")
  */
-class user
+abstract class user
 {
 	/**
 	 * @ORM\Id
@@ -52,6 +51,8 @@ class user
 	public function getEmail(){
 		return $this->email;
 	}
+
+	abstract public function getDiscr();
 
 	public function setPassword($password){
 		$this->password = $password;

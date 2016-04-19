@@ -62,6 +62,10 @@ class student extends user
 		return $this->level;
 	}
 
+	public function getDiscr(){
+		return 'student';
+	}
+
 	public function setDescription($name,$surname,$city,$profession){
 		$this->name = $name;
 		$this->surname = $surname;

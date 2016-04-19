@@ -2,7 +2,7 @@
 <?php echo validation_errors(); ?>
 <?php 
 	$attributes = array('class' => 'comment', 'style' => 'margin:auto 0;padding-right:80px;padding-left:80px;padding-top:30px;margin-top:20px');
-	echo form_open('francais/register',$attributes); 
+	echo form_open('guest/register',$attributes); 
 ?>
 	<h1 style="margin-bottom:30px;font-size:23px;">Sign up</h1>
 	<div class="register-switch">

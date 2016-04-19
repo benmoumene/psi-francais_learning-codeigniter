@@ -14,4 +14,8 @@ class admin extends user{
 	public function __construct($email,$username,$password){
 		parent::__construct($email,$username,$password);
 	}
+
+	public function getDiscr(){
+		return 'admin';
+	}
 }

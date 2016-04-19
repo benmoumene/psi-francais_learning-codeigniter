@@ -1,7 +1,7 @@
 <div style="position:absolute;right:140px;top:15px;">
 	<input  id="showlogin" type=button class=log_in value="Log in">
 	<ul id="login_yes" class="comment popup" style="display:none;position:absolute;">
-		<form>
+		<?php echo form_open('guest/login');?>
 			<li>
 				<input type="text" name="login_username" class=login placeholder="Username">
 			</li>

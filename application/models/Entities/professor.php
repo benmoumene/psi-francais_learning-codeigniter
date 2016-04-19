@@ -58,6 +58,10 @@ class professor extends user
 		return $this->level;
 	}
 
+	public function getDiscr(){
+		return 'prof';
+	}
+
 	public function setDescription($name,$surname,$city,$profession){
 		$this->name = $name;
 		$this->surname = $surname;

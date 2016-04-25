@@ -1,9 +1,10 @@
 <?php
 class Guest extends Public_Controller{
 
-	public function index(){
+	public function index($body = null){
 		$data['user'] = 'guest';
-		parent::view('register','login',$data);
+		$body = 'register';
+		parent::view($body,'login',$data);
 	}
 
 	public function register(){
@@ -13,10 +14,11 @@ class Guest extends Public_Controller{
 		$this->form_validation->set_rules('passconf','Password Confirmation','required|matches[password]');
 		
 		if ($this->form_validation->run() == FALSE)
-			parent::view("register",'login');
+			$this->index();
 		else{
 			$this->francais_model->new_user(set_value('email'),set_value('username'),set_value('password'),set_value('reg_who'));
-			parent::view('register_success','login');
+			$data = parent::session_menu_data();
+			parent::create_page('register_success','login');
 		}
 	}
 

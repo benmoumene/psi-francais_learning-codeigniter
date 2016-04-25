@@ -1,0 +1,38 @@
+Niveau = 1;
+Nom_du_Cours = Formulaire d'incsription;
+Visible = true;
+Nom:|input-*-Surname|
+Prenom:|input-*-Name|
+Adresse:|input-*-Address|
+Code Postal:|input-*-Postal Code|
+Ville:|input-*-City|
+Date de naissance:|input-*-Date of Birth|
+Profession:|input-*-Proffesion|
+Date:|input-*-Date|
+
+Niveau = 1;
+Nom_du_Cours = Exercice verbe;
+Visible = false;
+1.Vous aimez le chocolat ?
+Oui, j’|input-aime-aimer| le chocolat.
+2 . Vous regardez les matchs de foot à la télévision ?
+Oui, je |input-regarde-regarder| souvent les matchs à la télé.
+3 . Vous êtes ingénieur ?
+Non, je |input-suis-etre| artiste.
+4. Vous parlez anglais et italien ?
+Non, je |input-parle-parler| potugais et espagnol.
+5. Vous êtes divorcé ?
+Oui, je |input-suis-etre| divorcé.
+6. Vous êtes Brésilien ?
+Non, je |input-suis-etre| Espagnol.
+7. Vous regardez quoi à la télé le week- end ?
+Je |input-regarde-regarder| les spectacles.
+8. Vous aimez danser le tango ?
+Oui, j’|input-aime-aimer| danser le tango.
+
+Chère Maman, cher Papa
+Me voilà installée à Montpellier! J'habite avec une famille très gentille: Jacques et Marie Trapet et leurs enfants, Cecile et Juliette. Je trouve leur maison très belle, mais ils ne sont pas contents et ils cherchent une autre maison à la campagne, avec des chambres individuelles pour les enfants. Nous sommes très occupés ici.
+Marie est ingénieur et elle voyage beaucoup pour son travail et va souvent en Espagne, en Italie et en Suisse. C'est intéressant mais elle est toujours fatiguée; elle adore rester à la maison.
+Quand Marie est absente la vie continue! Jacques prépare les repas, et Cecile, Juliette et moi, nous aidons avec les autres travaux ménagers. Pendant le week-end, nous jouons au football, nous regardons la télévision, et nous parlons beaucoup. Les deux petites filles ont beaucoup de questions sur les États Unis!
+Je sais que vous rêvez de me rendre visite en France. C'est une très bonne idée! A bientôt j'espère!
+P.S. Si vous me donnez l'adresse de Monsieur Crissé, je lui enverrai une carte postale.

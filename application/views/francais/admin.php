@@ -2,14 +2,18 @@
 	<h1>Admin page</h1>
 	<br/>
 	<p>choisir la fonctionnalité:</p>	
-	<ul>
+	<ul style=list-style-type:none>
 		<li>
-			<a href="add_cours.html">ajouter cours</a><br/>
+			<a href="<?php echo site_url('admin/add_cours')?>">ajouter cours</a><br/>
+		</li>
 		<li>
-			<a href="add_text.html">ajouter du text</a><br/>
+			<a href="<?php echo site_url('admin/add_text')?>" >ajouter du text</a><br/>
+		</li>
 		<li>
-			<a href="mody_cours.html">modifier des cours</a>
+			<a href="<?php echo site_url('admin/mody_cours')?>">modifier des cours</a>
+		</li>
 		<li>
-			<a href="admin.html">ajouter admin</a>
+			<a href="<?php echo site_url('admin/add_admin')?>" >ajouter admin</a>
+		</li>
 	</ul>
 </div>

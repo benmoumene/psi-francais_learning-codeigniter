@@ -5,8 +5,7 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * @ORM\Entity
  */
-class cours_passed
-{
+class cours_passed{
     /**
 		 * @ORM\Id
      * @ORM\ManyToOne(targetEntity="student", inversedBy="coursPassed")
@@ -19,4 +18,9 @@ class cours_passed
      * @ORM\JoinColumn(name="cours_id", referencedColumnName="cours_id")
      */
     private $cours;
+
+		public function __construct($student, $cours){
+			$this->student = $student;
+			$this->cours = $cours;
+		}
 }

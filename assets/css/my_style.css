@@ -67,7 +67,6 @@ button.check {
 	display: block;
 }
 
-
 .comment{
 	background:#fff;
 	border-radius:10px;
@@ -79,6 +78,19 @@ button.check {
 	box-shadow: 0 0 25px rgba(0,0,0,0.04);
 	outline:none;
 	display:inline-block;
+}
+
+.cours-frame{
+	color: #FFF;
+	background-color: #5fba7d;
+	text-align: center;
+	border-radius: 4px;
+	outline:none;
+	display:inline;
+	padding:8px;
+	text-decoration:none;
+	border:none;
+	margin-top:5px;
 }
 
 ul.popup{
@@ -121,6 +133,10 @@ input.login{
 	-webkit-font-smoothing: antialiased;
 	text-align: left;
 	line-height: 24px;
+}
+
+span.nobr{
+	white-space:nowrap;
 }
 
 input.regular {

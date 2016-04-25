@@ -7,18 +7,30 @@ class MY_Controller extends CI_Controller {
 		$this->load->helper('url');
 	}
 
-	public function index(){
+	protected function session_menu_data(){
 		$data = array(
 			'user' => $this->session->userdata('discr'),
 			'username' => $this->session->userdata('username'),
 			'level' => $this->session->userdata('level')
 		); 
-		$this->view($data['user'], 'member', $data);
+		return $data;
+	}
+
+	protected function create_page($body = null,$data = null){
+		if($data == null)
+			$data = $this->session_menu_data();
+		if($body)
+			$this->view($body, 'member', $data);
+		else
+			$this->view($data['user'], 'member', $data);
+	}
+
+	public function index(){
+		$this->create_page();
 	}
 
 	public function logout(){
-		$array_items = array('id','username','level','discr','logged_in');
-		$this->session->unset_userdata($array_items);
+		$this->session->sess_destroy();
 		redirect('guest');
 	}
 
@@ -41,7 +53,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->view('templates/header',$data);
 		$this->load->view('menu/'.$menu, $data);
-		$this->load->view('francais/'.$body);
+		$this->load->view('francais/'.$body, $data);
 		$this->load->view('templates/footer');
 	}
 }
@@ -63,6 +75,9 @@ class Admin_Controller extends MY_Controller{
 		if(parent::log_info() != 'admin')
 			redirect($this->session->userdata('discr'));	
 		//load stuff
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->model('francais_model');
 	}
 }
 

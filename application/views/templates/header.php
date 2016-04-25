@@ -1,7 +1,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="<?php echo base_url().'assets';?>/css/my_style.css">
+		<link rel="stylesheet" href="<?php echo base_url().'/assets';?>/css/my_style.css">
+		<script type="text/javascript" src="<?= base_url() ?>assets/js/jquery/jquery.js"></script>
 	</head>
 	<body>
 		<div style="background-color:#4b7aa4; position:relative; height:67px; color:white;">

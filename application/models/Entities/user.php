@@ -13,7 +13,7 @@ abstract class user
 	 * @ORM\Column(type="integer", nullable=false)
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
-	private $user_id;
+	protected $user_id;
 
 	/**
 	 * @ORM\Column(type="string", length=25, nullable=false)

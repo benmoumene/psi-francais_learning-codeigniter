@@ -1,5 +1,6 @@
 <?php
 class Francais_model extends CI_Model{
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
@@ -68,11 +69,57 @@ class Francais_model extends CI_Model{
 		return $query->getResult();
 	}
 
+	public function get_courses($student_id, $level){
+		$dql = 'SELECT c.cours_id,c.name,c.level FROM Entities\cours c WHERE c.level <= :level and c.visible = 1';
+		$query = $this->doctrine->em->createQuery($dql);
+		$query->setParameter('level',$level);
+		$courses = $query->getResult();
+		foreach($courses as $key => $cours){
+			$index = array('student' => $student_id, 'cours' => $cours['cours_id']);
+			// usage of proxy (?!)
+			$courses[$key]['solved'] = $this->doctrine->em->getRepository('Entities\cours_passed')->findOneBy($index) ? true : false;
+		}
+		return $courses;
+	}
+
 	public function get_cours_descr($cours_id){
-		$dql = 'SELECT c.description FROM Entities\cours c WHERE c.cours_id = :cours_id';
+		$cours = $this->doctrine->em->find('Entities\cours', $cours_id);
+		return $cours->getDescription();
+	}
+
+	public function get_cours_info($cours_id){
+		$dql = 'SELECT c.name,c.data FROM Entities\cours c WHERE c.cours_id = :cours_id';
     $query = $this->doctrine->em->createQuery($dql);
 		$query->setParameter('cours_id',$cours_id);
-		return $query->getResult()[0]['description'];
+		return $query->getResult()[0];
+	}
+
+	public function get_cours_solutions($cours_id){
+		$cours = $this->doctrine->em->find('Entities\cours', $cours_id);
+		return $cours->getSolutions();
+	}
+
+	public function course_solved($student_id, $cours_id){
+		$student = $this->doctrine->em->find('Entities\student', $student_id);
+		$cours = $this->doctrine->em->find('Entities\cours', $cours_id);
+		$cours_passed = new Entities\cours_passed($student, $cours);
+		$this->doctrine->em->persist($cours_passed);
+		try{
+				$this->doctrine->em->flush();
+		}
+		catch( \Doctrine\DBAL\DBALException $e ){
+			if( $e->getPrevious()->getCode() === '23000' ) { 
+				//echo "cours alraedy solved"
+			} 
+		}
+
+	}
+
+	public function get_user_level($user_id){
+		$dql = 'SELECT s.level FROM Entities\student s WHERE s.user_id = :user_id';
+    $query = $this->doctrine->em->createQuery($dql);
+		$query->setParameter('user_id',$user_id);
+		return $query->getResult()[0]['level'];
 	}
 
 	public function user_discr($user){

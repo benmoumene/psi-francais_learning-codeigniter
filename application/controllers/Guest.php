@@ -3,7 +3,8 @@ class Guest extends Public_Controller{
 
 	public function index($body = null){
 		$data['user'] = 'guest';
-		$body = 'register';
+		if(is_null($body))
+			$body = 'register';
 		parent::view($body,'login',$data);
 	}
 
@@ -17,8 +18,7 @@ class Guest extends Public_Controller{
 			$this->index();
 		else{
 			$this->francais_model->new_user(set_value('email'),set_value('username'),set_value('password'),set_value('reg_who'));
-			$data = parent::session_menu_data();
-			parent::create_page('register_success','login');
+			$this->index('register_success');
 		}
 	}
 
@@ -27,17 +27,15 @@ class Guest extends Public_Controller{
 		$this->form_validation->set_rules('login_password','LogInPassword','required|min_length[4]|max_length[15]|callback__password_check');
 
 		if($this->form_validation->run() == FALSE)
-			parent::view('register','login');
+			$this->index();
 		else{
-			$user_data=$this->francais_model->user_discr(set_value('login_username'));
-			$user_data['logged_in'] = true;
+			$user_data = $this->francais_model->user_discr(set_value('login_username'));
 			$this->session->set_userdata($user_data);
 			redirect($user_data['discr']);
 		}
 	}
 
 	/*Another option would be to prepend an underscore to the callback function name, which is a little CI-specific "trick" to make a public method unaccessible from the URI. username_check would become _username_check, and the callback name would use double underscores: callback__username_check*/
-
 	public function _username_check($str){
 		return $this->francais_model->username_check($str);
 	}

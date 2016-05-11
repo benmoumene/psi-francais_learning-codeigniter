@@ -19,7 +19,6 @@ class cours
      */
     private $level;
 
-
     /**
      * @ORM\Column(type="text", nullable=false)
      */
@@ -60,6 +59,10 @@ class cours
 			$this->setCoursData($cours_data);
 		}
 
+		public function getCoursId(){
+			return $this->cours_id;
+		}
+
 		public function getName(){
 			return $this->name;
 		}
@@ -69,8 +72,12 @@ class cours
 		}
 
 		public function getSolutions(){
-			parse_str($solutions,$cours_fields);
+			parse_str($this->solutions,$cours_fields);
 			return $cours_fields;
+		}
+
+		public function getDescription(){
+			return $this->description;
 		}
 
 		public function getData(){

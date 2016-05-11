@@ -14,6 +14,7 @@ class cours_passed{
     private $student;
 
     /**
+		 * @ORM\Id
      * @ORM\ManyToOne(targetEntity="cours", inversedBy="coursPassed")
      * @ORM\JoinColumn(name="cours_id", referencedColumnName="cours_id")
      */
@@ -22,5 +23,9 @@ class cours_passed{
 		public function __construct($student, $cours){
 			$this->student = $student;
 			$this->cours = $cours;
+		}
+		
+		public function getId(){
+			return array($student->getId(),$cours->getId());
 		}
 }

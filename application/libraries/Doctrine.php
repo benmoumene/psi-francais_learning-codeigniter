@@ -35,16 +35,17 @@ class Doctrine
 		$proxies_dir = APPPATH . 'models/Proxies';
 		$metadata_paths = array(APPPATH . 'models');
 
-		$config = Setup::createConfiguration($isDevMode = false);
+		//dev mode disabled 
+		//$config = Setup::createConfiguration($isDevMode = false);
+
+		// Set $dev_mode to TRUE to disable caching while you develop
+		$config = Setup::createAnnotationMetadataConfiguration($metadata_paths, $dev_mode = true, $proxies_dir);
 		$driver = new AnnotationDriver(new AnnotationReader(), $metadata_paths);
-		// registering noop annotation autoloader - allow all annotations by default
 
 		AnnotationRegistry::registerLoader('class_exists');
 		$config->setMetadataDriverImpl($driver);
 
-		/*
-		// Set $dev_mode to TRUE to disable caching while you develop
-		$config = Setup::createAnnotationMetadataConfiguration($metadata_paths, $dev_mode = true, $proxies_dir);*/
+		
 
 		$this->em = EntityManager::create($connection_options, $config);
 

@@ -51,7 +51,8 @@ CREATE TABLE IF NOT EXISTS cours_passed(
 	PRIMARY KEY(student_user_id),
 	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	cours_id INTEGER,
-	FOREIGN KEY(cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY(cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	UNIQUE 'unique_index'('studet_user_id','cours_id')
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS text(

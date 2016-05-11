@@ -129,10 +129,10 @@ class Admin extends Admin_Controller{
 			$data = array(
 								'name' => strtolower($field),
 								'type' => 'text',
-								'class' => 'regular',
+								'class' => "regular",
 								'placeholder' => $field,
-								'size' => strlen($field)
-								);
+								'size' => strlen($field),
+							);
 			$input_pattern = "/\|input\-(.*)\-$field\|/";
 			$cours_descr = preg_replace($input_pattern,form_input($data),$cours_descr);
 		}

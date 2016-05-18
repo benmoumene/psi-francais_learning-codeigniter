@@ -8,8 +8,45 @@
         <?php echo $data; ?>
         <br/>
 				<center>
-				<button class="check" type="submit" style="font-weight:normal">vérifier cours</button>
+				<button class="check" data-cours_id=<?php echo $cours_id;?> type="submit" style="font-weight:normal">vérifier cours</button>
 				</center>
 				</form>
     </div>
 </center>
+
+<script>
+		//this isn't necessary, beforeunload does the job
+    // $(document).ready(function() {
+    //     $('.check').click(function() {
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "set_cours_id",
+    //             data: {
+    //                 cours_id: $(this).data('cours_id')
+    //             },
+    //             dataType: "text",
+    //             cache: false,
+    //             success: function(data) {
+		// 							alert("Oui, c'est ca. Deux!"); //as a debugging message.
+    //             }
+    //         });
+    //     });
+    // });
+
+		$(window).bind('beforeunload',function(){
+				$.ajax({
+						type: "POST",
+						url: "set_cours_id",
+						data: {
+								cours_id: $('.check').data('cours_id')
+						},
+						dataType: "text",
+						cache: false,
+						// success: function(data) {
+						//     alert("Oui, c'est ca"); //as a debugging message.
+						// }
+				});
+				//returns undefined 'cause there is no dialog
+				return undefined;
+		});
+</script>

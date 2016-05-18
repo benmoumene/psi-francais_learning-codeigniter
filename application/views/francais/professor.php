@@ -4,8 +4,8 @@
     <p>choisir la fonctionnalité:</p>
     <ul>
         <li>
-            <a href="prof_dem.html">vérifier les demandes des étudiants</a><br/>
+            <a href="<?php echo site_url('professor/my_requests')?>">vérifier les demandes des étudiants</a><br/>
             <li>
-                <a href="prof_etu.html">mes étudiants</a><br/>
+                <a href="<?php echo site_url('professor/my_students')?>">mes étudiants</a><br/>
     </ul>
 </div>

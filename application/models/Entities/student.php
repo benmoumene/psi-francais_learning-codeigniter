@@ -37,6 +37,11 @@ class student extends user
 	 */
 	private $coursPassed;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="cours_passed", mappedBy="student")
+	 */
+	private $profs_students;
+
 	public function __construct($email,$username,$password){
 		parent::__construct($email,$username,$password);
 		$this->level = 1;

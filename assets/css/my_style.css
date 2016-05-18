@@ -168,25 +168,37 @@ input.send{
   color: rgba(255, 255, 255, 0.95);
   text-align: center;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  background: #d7604b;
-  border-radius: 3px;
-  background-image: -webkit-linear-gradient(top, #dc745e, #d45742);
-  background-image: -moz-linear-gradient(top, #dc745e, #d45742);
-  background-image: -o-linear-gradient(top, #dc745e, #d45742);
-  background-image: linear-gradient(to bottom, #dc745e, #d45742);
+	border-radius:7px;
+	background: #E86850;
+  /* background: #d7604b; */
+  /* background-image: -webkit-linear-gradient(top, #dc745e, #d45742); */
+  /* background-image: -moz-linear-gradient(top, #dc745e, #d45742); */
+  /* background-image: -o-linear-gradient(top, #dc745e, #d45742); */
+  /* background-image: linear-gradient(to bottom, #dc745e, #d45742); */
 }
 
-input.request{
+.request{
+	border-radius:7px;
   width: 270px;
   line-height: 43px;
   font-size: 19px;
   font-weight: 500;
-  color: white;
   color: rgba(255, 255, 255, 0.95);
   text-align: center;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  background: #3b5998;
-  border-radius: 3px;
+  background: #587498;
+}
+
+.request-sent{
+	border-radius:7px;
+  width: 270px;
+  line-height: 43px;
+  font-size: 19px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	background-color:#587498;
 }
 
 .log_in{

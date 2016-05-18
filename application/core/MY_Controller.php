@@ -15,8 +15,8 @@ class MY_Controller extends CI_Controller {
 	protected function session_menu_data(){
 		$data = array(
 			'user' => $this->session->userdata('discr'),
-			'username' => $this->session->userdata('username'),
-			'level' => $this->session->userdata('level')
+			'my_username' => $this->session->userdata('username'),
+			'my_level' => $this->session->userdata('level')
 		); 
 		return $data;
 	}
@@ -96,6 +96,8 @@ class Professor_Controller extends MY_Controller{
 		if(parent::log_info() != 'professor')
 			redirect($this->session->userdata('discr'));	
 		//load stuff
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 	}
 }
 ?>

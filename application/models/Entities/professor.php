@@ -33,6 +33,11 @@ class professor extends user
 	 */
 	private $profession;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="cours_passed", mappedBy="professor")
+	 */
+	private $profs_students;
+
 	public function __construct($email,$username,$password){
 		parent::__construct($email,$username,$password);
 		$this->level = 1;

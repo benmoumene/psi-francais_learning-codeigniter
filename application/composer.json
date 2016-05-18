@@ -1,5 +1,6 @@
 {
     "require": {
-        "doctrine/orm": "*"
+        "doctrine/orm": "*",
+				"elasticsearch/elasticsearch": "2.*"
     }
 }

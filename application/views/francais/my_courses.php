@@ -12,7 +12,7 @@ if($cours['level']!=$last_level):?>
 							<?php echo $cours['name']; ?>
 							</a>
             </li>
-						</br>
+            </br>
             <?php $last_level = $cours['level'];
 endforeach; ?>
     </div>

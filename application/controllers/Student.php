@@ -9,7 +9,7 @@ class Student extends Student_Controller{
 
 	public function show_courses(){
 		$data = parent::session_menu_data();
-		$data['courses'] = $this->francais_model->get_courses($this->session->userdata('id'), $this->session->userdata('id'));
+		$data['courses'] = $this->francais_model->get_courses($this->session->userdata('id'), $this->session->userdata('level'));
 		parent::create_page('my_courses',$data);
 	}
 
@@ -30,7 +30,6 @@ class Student extends Student_Controller{
 			$this->solve_cours();
 		else{
 			$this->francais_model->course_solved($this->session->userdata('id'),$this->session->userdata('cours_id'));
-			$this->session->unset_userdata('cours_id');
 			parent::create_page('cours_solved');
 		}
 	}
@@ -42,19 +41,66 @@ class Student extends Student_Controller{
 	}
 
 	public function show_students(){
-		//TO DO: show students below and on current student level
+		$data = parent::session_menu_data();
+		$data['users'] = $this->francais_model->get_students($this->session->userdata('id'), $this->session->userdata('level'));
+		$data['show'] = 'students';
+		parent::create_page("my_users",$data);
+	}
+
+	public function show_student(){
+		$data = array_merge(parent::session_menu_data(),$this->francais_model->get_student($this->session->userdata('user_id')));
+		parent::create_page("my_user",$data);
 	}
 	
 	public function show_professors(){
-		//TO DO: show professors below and on current student level
+		$data = parent::session_menu_data();
+		$data['users'] = $this->francais_model->get_professors($this->session->userdata('level'));
+		$data['show'] = 'professors';
+		parent::create_page("my_users",$data);
+	}
+
+	public function show_professor(){
+		$data = array_merge(parent::session_menu_data(),$this->francais_model->get_professor($this->session->userdata('id'),$this->session->userdata('user_id')));
+		parent::create_page("my_professor",$data);
+	}
+
+	public function send_request(){
+		$this->francais_model->set_request($this->session->userdata('id'),set_value('prof_id'));
+	}
+
+	public function set_user_id(){
+		$this->session->set_userdata('user_id', set_value('user_id'));
 	}
 
 	public function read_text(){
-		//TO DO: input french text for reading(interactively)
+		parent::create_page("my_text");
 	}
 
 	public function read_interactive_text(){
-		//TO DO: read interactively
+		$data = parent::session_menu_data();
+		$data['words'] = explode(' ',set_value('text'));
+		parent::create_page("my_inter_text",$data);
+	}
+
+	public function check_word(){
+		$params = [
+				'index' => 'dict',
+				'type' => 'type_fr',
+				'body' => [
+						'query' => [
+								'match' => [
+										'word' => trim(set_value('word'))
+								]
+						]
+				]
+		];
+		$response = $this->elasticsearch->client->search($params);
+
+		if(isset($response['hits']['hits'][0]))
+			foreach($response['hits']['hits'] as $hit)
+				echo '<hr>'.htmlspecialchars($hit['_source']['translation']."\n");
+		else
+			echo '<hr>Pas de définition trouvée.';
 	}
 }
 ?>

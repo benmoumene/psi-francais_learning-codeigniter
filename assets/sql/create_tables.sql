@@ -48,14 +48,22 @@ CREATE TABLE IF NOT EXISTS cours(
 
 CREATE TABLE IF NOT EXISTS cours_passed(
 	student_user_id INTEGER,
-	PRIMARY KEY(student_user_id),
-	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	cours_id INTEGER,
+	PRIMARY KEY(student_user_id,cours_id),
+	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	UNIQUE 'unique_index'('studet_user_id','cours_id')
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS text(
 	text_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	data TEXT NOT NULL
 )ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS profs_students(
+	student_user_id INTEGER,
+	professor_user_id INTEGER,
+	accepted TINYINT(1) NOT NULL,
+	PRIMARY KEY(student_user_id,professor_user_id),
+	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(professor_user_id) REFERENCES professor(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;

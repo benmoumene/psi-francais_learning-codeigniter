@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS cours(
 	name VARCHAR(50) NOT NULL,
 	visible BOOLEAN NOT NULL,
 	admin_user_id INTEGER,
+	-- admin_id,manyToOne
 	FOREIGN KEY(admin_user_id) REFERENCES admin(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-	/*admin_id,manyToOne*/
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS cours_passed(
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS cours_passed(
 	cours_id INTEGER,
 	PRIMARY KEY(student_user_id,cours_id),
 	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY(cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS text(
@@ -66,4 +66,22 @@ CREATE TABLE IF NOT EXISTS profs_students(
 	PRIMARY KEY(student_user_id,professor_user_id),
 	FOREIGN KEY(student_user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(professor_user_id) REFERENCES professor(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS communication(
+	id_communication INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id_zero INTEGER NOT NULL,
+	user_id_one INTEGER NOT NULL,
+	UNIQUE unique_index(user_id_zero,user_id_one), 
+	FOREIGN KEY(user_id_zero) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(user_id_one) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS message(
+	id_communication INTEGER NOT NULL PRIMARY KEY,
+	-- sender -> zero or one
+	sender TINYINT(1) NOT NULL,
+	data TEXT NOT NULL,
+	time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY(id_communication) REFERENCES communication(id_communication) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;

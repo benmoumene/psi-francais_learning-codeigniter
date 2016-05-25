@@ -2,7 +2,7 @@
 class Guest extends Public_Controller{
 
 	public function index($body = null){
-		$data['user'] = 'guest';
+		$data['my_user'] = 'guest';
 		if(is_null($body))
 			$body = 'register';
 		parent::view($body,'login',$data);
@@ -29,7 +29,7 @@ class Guest extends Public_Controller{
 		if($this->form_validation->run() == FALSE)
 			$this->index();
 		else{
-			$user_data = $this->francais_model->user_discr(set_value('login_username'));
+			$user_data = $this->francais_model->get_user_discr(set_value('login_username'));
 			$this->session->set_userdata($user_data);
 			redirect($user_data['discr']);
 		}

@@ -6,6 +6,8 @@ class MY_Controller extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->model('francais_model');
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 	}
 
 	public function index(){
@@ -14,9 +16,10 @@ class MY_Controller extends CI_Controller {
 
 	protected function session_menu_data(){
 		$data = array(
-			'user' => $this->session->userdata('discr'),
+			'my_user' => $this->session->userdata('discr'),
 			'my_username' => $this->session->userdata('username'),
-			'my_level' => $this->session->userdata('level')
+			'my_level' => $this->session->userdata('level'),
+			'my_id' => $this->session->userdata('id')
 		); 
 		return $data;
 	}
@@ -28,7 +31,6 @@ class MY_Controller extends CI_Controller {
 			show_404();
 		}
 
-		$this->load->helper('url');
 		$this->load->view('templates/header',$data);
 		$this->load->view('menu/'.$menu, $data);
 		$this->load->view('francais/'.$body, $data);
@@ -41,7 +43,7 @@ class MY_Controller extends CI_Controller {
 		if($body)
 			$this->view($body, 'member', $data);
 		else
-			$this->view($data['user'], 'member', $data);
+			$this->view($data['my_user'], 'member', $data);
 	}
 
 	public function logout(){
@@ -63,8 +65,6 @@ class Public_Controller extends MY_Controller{
 		parent::__construct();
 		if(parent::log_info() != 'guest')
 			redirect($this->session->userdata('discr'));	
-		$this->load->helper('form');
-		$this->load->library('form_validation');
 	}
 }
 
@@ -74,8 +74,6 @@ class Admin_Controller extends MY_Controller{
 		if(parent::log_info() != 'admin')
 			redirect($this->session->userdata('discr'));	
 		//load stuff
-		$this->load->helper('form');
-		$this->load->library('form_validation');
 	}
 }
 
@@ -85,8 +83,6 @@ class Student_Controller extends MY_Controller{
 		if(parent::log_info() != 'student')
 			redirect($this->session->userdata('discr'));	
 		//load stuff
-		$this->load->helper('form');
-		$this->load->library('form_validation');
 	}
 }
 
@@ -96,8 +92,17 @@ class Professor_Controller extends MY_Controller{
 		if(parent::log_info() != 'professor')
 			redirect($this->session->userdata('discr'));	
 		//load stuff
-		$this->load->helper('form');
-		$this->load->library('form_validation');
+	}
+}
+
+class Chat_Controller extends MY_Controller{
+
+	public function __construct(){
+		parent::__construct();
+		$who = parent::log_info();
+		if($who == 'admin' || $who == 'guest')
+			redirect($this->session->userdata('discr'));	
+		//load stuff
 	}
 }
 ?>

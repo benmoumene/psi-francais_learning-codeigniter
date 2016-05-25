@@ -30,6 +30,11 @@ abstract class user
 	 */
 	private $email;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="communication", mappedBy="user")
+	 */
+	private $communication;
+
 	public function __construct($email,$username,$password){
 		$this->username = $username;
 		$this->password = $password;

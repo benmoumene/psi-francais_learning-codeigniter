@@ -11,7 +11,7 @@ class professor extends user
 	/**
 	 * @ORM\Column(type="integer", nullable=false)
 	 */
-	private $level;
+	private $level = 1;
 
 	/**
 	 * @ORM\Column(type="string", length=20, nullable=true)
@@ -40,7 +40,6 @@ class professor extends user
 
 	public function __construct($email,$username,$password){
 		parent::__construct($email,$username,$password);
-		$this->level = 1;
 	}
 	
 	public function getName(){
@@ -65,6 +64,10 @@ class professor extends user
 
 	public function getDiscr(){
 		return 'prof';
+	}
+
+	public function setLevel($level){
+		$this->level = $level;
 	}
 
 	public function setDescription($name,$surname,$city,$profession){

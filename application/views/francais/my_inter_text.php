@@ -1,19 +1,11 @@
 <script src="<?php echo base_url().'assets';?>/js/jquery.magnific-popup.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url().'assets';?>/css/magnific-popup.css?<?php echo time();?>">
 
-<style>
-    p {
-        font-size: 120%;
-        display: inline;
-        cursor: pointer
-    }
-</style>
-
 <center>
     <div class="comment" style="margin:15px auto auto 20;max-width:500px;">
         <h1>Le texte interactive:</h1>
         <br/>
-        <div class=comments>
+        <div class=inter-text>
             <?php foreach($words as $word):
 						echo "<p>$word </p>";
 					endforeach; ?>
@@ -23,7 +15,7 @@
 
 <script>
     $(document).ready(function() {
-        $('div.comments p').click(function() {
+        $('div.inter-text p').click(function() {
             $.ajax({
                 type: "POST",
                 url: "check_word",

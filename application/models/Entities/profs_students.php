@@ -23,12 +23,11 @@ class profs_students{
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-		private $accepted;
+		private $accepted = false;
 
 		public function __construct($student, $professor){
 			$this->student = $student;
 			$this->professor = $professor;
-			$this->accepted = false;
 		}
 
 		public function getAccepted(){

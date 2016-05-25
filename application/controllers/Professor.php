@@ -13,7 +13,7 @@ class Professor extends Professor_Controller{
 		 parent::create_page("my_users_p",$data);
 	}
 
-	public function show_student_request(){
+	public function show_student_requests(){
 		$data = array_merge(parent::session_menu_data(),$this->francais_model->get_student($this->session->userdata('user_id')));
 		parent::create_page("my_student",$data);
 	}

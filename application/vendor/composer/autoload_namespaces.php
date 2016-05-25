@@ -6,7 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'React\\ZMQ' => array($vendorDir . '/react/zmq/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Guzzle\\Stream' => array($vendorDir . '/guzzle/stream'),
+    'Guzzle\\Parser' => array($vendorDir . '/guzzle/parser'),
+    'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
+    'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
+    'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),

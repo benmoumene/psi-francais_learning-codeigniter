@@ -45,8 +45,6 @@ class Doctrine
 		AnnotationRegistry::registerLoader('class_exists');
 		$config->setMetadataDriverImpl($driver);
 
-		
-
 		$this->em = EntityManager::create($connection_options, $config);
 
 		$loader = new ClassLoader($models_namespace, $models_path);

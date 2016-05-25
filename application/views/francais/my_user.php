@@ -41,7 +41,7 @@
         </tr>
     </table>
     </br>
-    <?php echo form_open('chat/talk'); ?>
+    <?php echo form_open('chat'); ?>
     <input type="submit" data-user_id=<?php echo $user_id; ?> value="aller discuter" class=send>
     </form>
 </center>

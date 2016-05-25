@@ -42,16 +42,16 @@
     </table>
     </br>
     <?php if(isset($accepted) and $accepted):?>
-			<?php echo form_open('chat/talk'); ?>
+			<?php echo form_open('chat'); ?>
 			<input type="submit" data-user_id=<?php echo $user_id; ?> value="aller discuter" class=send>
 			</form>
     <?php elseif(isset($accepted) and !$accepted):?>
-			<?php echo form_open('chat/talk'); ?>
+			<?php echo form_open('chat'); ?>
 			<input type="hidden" data-user_id=<?php echo $user_id; ?> value="aller discuter" class=send>
 			</form>
 			<p class=request-sent>requête envoyée</p>
     <?php else: ?>
-			<?php echo form_open('chat/talk'); ?>
+			<?php echo form_open('chat'); ?>
 			<input type="hidden" data-user_id=<?php echo $user_id; ?> value="aller discuter" class=send>
 			</form>
 			<p class=request style="cursor:pointer" >envoyer une requête</p>

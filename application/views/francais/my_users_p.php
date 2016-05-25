@@ -1,10 +1,11 @@
 <div class="comment" style="margin:15px auto auto 20">
-    <h1><?php echo ($show == 'students_req') ? 'étudiants requêtee' : 'etudiants'?></h1>
+    <h1><?php echo ($show == 'students_req') ? 'Les étudiants requêtee:' : 'Mes étudiants:'?></h1>
 
-    <ul style="list-style-type:none">
+        <ul style="list-style-type:none;text-align:left">
         <?php foreach($users as $user):?>
+				<br/>
         <li>
-            <a id="user" data-user_id=<?php echo $user[ 'user_id'];?> href=<?php echo ($show == 'students_req') ? site_url('professor/show_student_requests') : site_url( "professor/show_student");?> >
+            <a id="user" class='cours-frame' style="background-color:<?php echo ($show == 'students_req') ? '#6B78B4' : '#587498';?>" data-user_id=<?php echo $user[ 'user_id'];?> href=<?php echo ($show == 'students_req') ? site_url('professor/show_student_requests') : site_url( "professor/show_student");?> >
 							<?php echo $user['username']; ?>
 						</a>
         </li>
@@ -14,7 +15,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#user').click(function() {
+        $('.cours-frame').click(function() {
             $.ajax({
                 type: "POST",
                 url: "set_user_id",

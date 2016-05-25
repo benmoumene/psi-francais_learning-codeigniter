@@ -29,7 +29,12 @@ class Student extends Student_Controller{
 		if($this->form_validation->run() == FALSE)
 			$this->solve_cours();
 		else{
-			$this->francais_model->course_solved($this->session->userdata('id'),$this->session->userdata('cours_id'));
+			$cours_passed = $this->francais_model->course_solved($this->session->userdata('id'),$this->session->userdata('cours_id'));
+			if($cours_passed != 0 && $cours_passed % 2 === 0){
+				$new_level = $this->francais_model->increment_level($this->session->userdata('id'));
+				$this->session->set_userdata('level',$new_level);
+				// $this->francais_model->inform_professors($this->session->userdata('id'));
+			}
 			parent::create_page('cours_solved');
 		}
 	}

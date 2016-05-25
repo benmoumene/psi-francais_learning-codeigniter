@@ -131,7 +131,8 @@ class Admin extends Admin_Controller{
 								'type' => 'text',
 								'class' => "regular",
 								'placeholder' => $field,
-								'size' => strlen($field),
+								'size' => strlen($field) + 1,
+								'autocomplete' => 'off',
 							);
 			$input_pattern = "/\|input\-(.*)\-$field\|/";
 			$cours_descr = preg_replace($input_pattern,form_input($data),$cours_descr);

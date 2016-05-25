@@ -7,20 +7,36 @@ use Doctrine\ORM\Mapping AS ORM;
  */
 class communication
 {
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $data;
+		
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer", nullable=false)
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id_communication;
+	/**
+	 * @ORM\ManyToOne(targetEntity="user", inversedBy="communication")
+	 * @ORM\JoinColumn(name="user_id_zero", referencedColumnName="user_id")
+	 */
+	private $user_zero;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="student", inversedBy="communication")
-     * @ORM\JoinColumn(name="student_user_id", referencedColumnName="user_id")
-     */
-    private $student;
+	/**
+	 * @ORM\ManyToOne(targetEntity="user", inversedBy="communication")
+	 * @ORM\JoinColumn(name="user_id_one", referencedColumnName="user_id")
+	 */
+	private $user_one;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="user", inversedBy="communicationStdProf")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
-     */
-    private $user;
+	/**
+	 * @ORM\OneToMany(targetEntity="message", mappedBy="communication")
+	 */
+	private $message;
+
+	public function __construct($user_zero,$user_one){
+		$this->user_zero = $user_zero;
+		$this->user_one = $user_one;
+	}
+
+	public function getIdCommunication(){
+		return $this->id_communication;
+	}
 }

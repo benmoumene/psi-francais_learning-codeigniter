@@ -1,6 +1,8 @@
 {
     "require": {
         "doctrine/orm": "*",
-				"elasticsearch/elasticsearch": "2.*"
+				"elasticsearch/elasticsearch": "2.*",
+				"cboden/ratchet": "0.3.*",
+				"react/zmq": "0.2.*|0.3.*"
     }
 }

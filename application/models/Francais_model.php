@@ -52,7 +52,7 @@ class Francais_model extends CI_Model{
 	}
 
 	public function update_cours($cours_data){
-		$cours = $this->doctrine->em->find('Entities\cours', $cours_id);
+		$cours = $this->doctrine->em->find('Entities\cours', $cours_data['cours_id']);
 		$cours->setCoursData($cours_data);
 		$this->doctrine->em->flush();
 	}
@@ -104,9 +104,23 @@ class Francais_model extends CI_Model{
 		catch( \Doctrine\DBAL\DBALException $e ){
 			if( $e->getPrevious()->getCode() === '23000' ) { 
 				//echo "cours alraedy solved"
+				return 0;
 			} 
 		}
+		$query = $this->doctrine->em->createQuery('SELECT COUNT(cp.student) FROM Entities\cours_passed cp WHERE cp.student = :student_id');
+		$query->setParameter('student_id',$student_id);
+		return $query->getSingleScalarResult();
+	}
 
+	public function increment_level($user_id){
+		$user = $this->doctrine->em->find('Entities\student', $user_id);
+		if(is_null($user)){
+			$user = $this->doctrine->em->find('Entities\professor', $user_id);
+		}
+		$user_level = $user->getLevel();
+		$user->setLevel(++$user_level);
+		$this->doctrine->em->flush();
+		return $user_level;
 	}
 
 	public function get_students($student_id, $level){
@@ -148,7 +162,6 @@ class Francais_model extends CI_Model{
 	}
 
 	public function set_request($student_id, $professor_id){
-		echo "student: ".$student_id." prof: ".$professor_id;
 		$student = $this->doctrine->em->find('Entities\student', $student_id);
 		$professor = $this->doctrine->em->find('Entities\professor', $professor_id);
 		$request = new Entities\profs_students($student,$professor);
@@ -193,7 +206,12 @@ class Francais_model extends CI_Model{
 		return $user->getLevel();
 	}
 
-	public function user_discr($user){
+	public function get_user_info($user_id){
+		$user = $this->doctrine->em->find('Entities\user', $user_id);
+		return array('id' => $user->getUserId(), 'username' => $user->getUsername(), 'discr' => $this->doctrine->em->getClassMetadata(get_class($user))->discriminatorValue);
+	}
+
+	public function get_user_discr($user){
 		$dql = 'SELECT u FROM Entities\user u WHERE u.username = :user';
     $query = $this->doctrine->em->createQuery($dql);
     $query->setParameter('user', $user);
@@ -213,6 +231,35 @@ class Francais_model extends CI_Model{
     $query = $this->doctrine->em->createQuery($dql);
     $query->setParameter('password', $password);
     return !empty($query->getResult());
+	}
+
+	public function new_message($id_communication, $sender, $data){
+		$communication = $this->doctrine->em->find('Entities\communication', $id_communication);
+		$message = new Entities\message($communication,$sender,$data);
+		$this->doctrine->em->persist($message);
+		$this->doctrine->em->flush();
+	}
+
+	public function get_messages($id_communication){
+		$dql = 'SELECT m.sender,m.data,m.time FROM Entities\message m where m.communication = :id_communication ORDER BY m.time';//limit with some number depends on the textarea size
+    $query = $this->doctrine->em->createQuery($dql)/* ->setMaxResults(1000)->setFirstResult(10) */;
+		$query->setParameter('id_communication', $id_communication);
+		return $query->getResult();
+	}
+
+	public function get_chat($user_id_zero,$user_id_one){
+		$dql = 'SELECT c.id_communication FROM Entities\communication c where (c.user_zero = :user_id_zero and c.user_one = :user_id_one) or (c.user_zero = :user_id_one and c.user_one = :user_id_zero)';
+    $query = $this->doctrine->em->createQuery($dql);
+		$query->setParameters(array('user_id_zero' => $user_id_zero, 'user_id_one' => $user_id_one));
+		$result = $query->getResult(); 
+		if(!empty($result))
+			return $result[0]['id_communication'];
+		$user_zero = $this->doctrine->em->find('Entities\user', $user_id_zero);
+		$user_one = $this->doctrine->em->find('Entities\user', $user_id_one);
+		$communication = new Entities\communication($user_zero,$user_one);
+		$this->doctrine->em->persist($communication);
+		$this->doctrine->em->flush();
+		return $communication->getIdCommunication();
 	}
 }
 ?>

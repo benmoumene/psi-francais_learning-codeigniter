@@ -4,7 +4,7 @@ class Guest extends Public_Controller{
 	public function index($body = null){
 		$data['my_user'] = 'guest';
 		if(is_null($body))
-			$body = 'register';
+			$body =	$data['my_user']; 
 		parent::view($body,'login',$data);
 	}
 

@@ -1,5 +1,6 @@
 <?php
 class Professor extends Professor_Controller{
+
 	public function index(){
 		if(is_null($this->session->userdata('level')))
 			$this->session->set_userdata('level',$this->francais_model->get_user_level($this->session->userdata('id')));

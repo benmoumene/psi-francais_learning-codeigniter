@@ -39,5 +39,14 @@ class Professor extends Professor_Controller{
 		$data = array_merge(parent::session_menu_data(),$this->francais_model->get_student($this->session->userdata('user_id')));
 		parent::create_page("my_user",$data);
 	}
+
+	public function update_info(){
+		parent::create_page('update_info');
+	}
+
+	public function set_info(){
+		$this->francais_model->set_user_info($this->session->userdata('id'), set_value('surname'), set_value('name'), set_value('city'), set_value('profession'));
+		parent::create_page('info_added');
+	}
 }
 ?>

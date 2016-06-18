@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS user(
 	user_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(25) NOT NULL,
 	password VARCHAR(25) NOT NULL,
-	email VARCHAR(50) NOT NULL
+	email VARCHAR(50) NOT NULL,
+	discr VARCHAR(25) NOT NULL
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS student(
@@ -78,10 +79,10 @@ CREATE TABLE IF NOT EXISTS communication(
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS message(
-	id_communication INTEGER NOT NULL PRIMARY KEY,
-	-- sender -> zero or one
-	sender TINYINT(1) NOT NULL,
+	id_communication INTEGER NOT NULL,
+	sender INTEGER NOT NULL,
 	data TEXT NOT NULL,
 	time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(id_communication, sender, time),
 	FOREIGN KEY(id_communication) REFERENCES communication(id_communication) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;

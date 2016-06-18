@@ -123,6 +123,15 @@ class Francais_model extends CI_Model{
 		return $user_level;
 	}
 
+	public function set_user_info($user_id, $surname, $name, $city, $profession){
+		$user = $this->doctrine->em->find('Entities\student', $user_id);
+		if(is_null($user)){
+			$user = $this->doctrine->em->find('Entities\professor', $user_id);
+		}
+		$user->setDescription($name, $surname, $city, $profession);
+		$this->doctrine->em->flush();
+	}
+
 	public function get_students($student_id, $level){
 		$dql = 'SELECT s.user_id,s.username FROM Entities\student s WHERE s.user_id <> :student_id and s.level <= :level';
 		$query = $this->doctrine->em->createQuery($dql);

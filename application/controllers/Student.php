@@ -107,5 +107,14 @@ class Student extends Student_Controller{
 		else
 			echo '<hr>Pas de définition trouvée.';
 	}
+
+	public function update_info(){
+		parent::create_page('update_info');
+	}
+
+	public function set_info(){
+		$this->francais_model->set_user_info($this->session->userdata('id'), set_value('surname'), set_value('name'), set_value('city'), set_value('profession'));
+		parent::create_page('info_added');
+	}
 }
 ?>

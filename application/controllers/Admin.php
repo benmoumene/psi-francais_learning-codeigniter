@@ -2,7 +2,7 @@
 class Admin extends Admin_Controller{
 
 	private $level_pattern = '/Niveau ?= ?([0-9]{1,}) ?;/';
-	private $name_pattern = '/Nom_du_Cours ?= ?(.*) ?;/';
+	private $name_pattern = '/Nom_du_Cours ?= ?([^;]*);/';
 	private $input_pattern = '/\|input\-(.*)\-(.*)\|/';
 	private $visible_pattern = '/Visible ?= ?(true|false) ?;/';
 

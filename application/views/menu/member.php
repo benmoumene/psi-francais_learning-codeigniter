@@ -7,8 +7,8 @@
         <li>
             <?php if($my_user != 'admin'):?>
             <a style="text-decoration:none" href=<?php echo ($my_user=='professor' ) ? site_url( 'professor/update_info') : site_url( "student/update_info");?>>Infos ensemble</a>
-            <?php endif?>
 						</br>
+            <?php endif?>
             <a style="text-decoration:none" href="<?php echo site_url($my_user.'/logout') ?>">Logout</a>
         </li>
     </ul>

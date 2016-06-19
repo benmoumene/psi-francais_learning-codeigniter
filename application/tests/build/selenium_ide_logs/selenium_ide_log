@@ -1,0 +1,28 @@
+[info] Playing test case selenium_ide_test
+[info] Executing: |open | /psi-francais_learning/index.php |  |
+[info] Executing: |click | id=showlogin |  |
+[info] Executing: |type | name=login_username | stevanm |
+[info] Executing: |type | name=login_password | sdadasd |
+[info] Executing: |clickAndWait | css=button.check |  |
+[info] Test case passed
+[info] Playing test case selenium_ide_test2
+[info] Executing: |open | /psi-francais_learning/ |  |
+[info] Executing: |type | name=email | test@yahoo.com |
+[info] Executing: |type | name=username | test |
+[info] Executing: |type | name=password | testbr1 |
+[info] Executing: |type | name=passconf | testbr2 |
+[info] Executing: |clickAndWait | css=input.register-button |  |
+[info] Test case passed
+[info] Playing test case selenium_ide_test3
+[info] Executing: |open | /psi-francais_learning/ |  |
+[info] Executing: |click | id=showlogin |  |
+[info] Executing: |type | name=login_username | stevanm |
+[info] Executing: |type | name=login_password | stevanbr1 |
+[info] Executing: |clickAndWait | css=button.check |  |
+[info] Executing: |clickAndWait | link=etudiants |  |
+[info] Executing: |clickAndWait | link=wbnxd |  |
+[info] Executing: |clickAndWait | css=input.send |  |
+[info] Executing: |type | id=message_box | test |
+[info] Executing: |click | id=send |  |
+[info] Test case passed
+[info] Test suite completed: 3 played,  all passed!
